@@ -208,3 +208,72 @@ if (artisanSignupForm && artisanSignupMessage) {
     artisanSignupForm.reset();
   });
 }
+
+// index.mjs or index.js (Node.js 18)
+
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { v4 as uuidv4 } from "uuid";
+
+// If using Node.js 18 managed runtime, add these deps in a layer or bundle.
+// For quick test, you can inline a simple uuid generator if needed.
+
+const client = new DynamoDBClient({});
+const docClient = DynamoDBDocumentClient.from(client);
+
+const TABLE_NAME = "47BuildersProjectLeads";
+
+export const handler = async (event) => {
+  try {
+    // Event body comes as JSON string from API Gateway (HTTP API / REST API)
+    const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body || {};
+
+    const {
+      fullName,
+      email,
+      country,
+      location,
+      project,
+      source = "landing-page",
+    } = body;
+
+    if (!fullName || !email || !project) {
+      return {
+        statusCode: 400,
+        headers: { "Access-Control-Allow-Origin": "*" },
+        body: JSON.stringify({ message: "Missing required fields" }),
+      };
+    }
+
+    const item = {
+      id: uuidv4(),
+      timestamp: new Date().toISOString(),
+      fullName,
+      email,
+      country: country || "",
+      location: location || "",
+      project,
+      source,
+    };
+
+    await docClient.send(
+      new PutCommand({
+        TableName: TABLE_NAME,
+        Item: item,
+      })
+    );
+
+    return {
+      statusCode: 200,
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({ message: "Lead saved successfully" }),
+    };
+  } catch (err) {
+    console.error("Error saving lead:", err);
+    return {
+      statusCode: 500,
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({ message: "Internal server error" }),
+    };
+  }
+};
