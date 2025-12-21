@@ -1,0 +1,101 @@
+customHeaders:
+  # Global security headers for all responses
+  - pattern: "**/*"
+    headers:
+      # Force HTTPS
+      - key: "Strict-Transport-Security"
+        value: "max-age=63072000; includeSubDomains; preload"
+
+      # Basic hardening
+      - key: "X-Content-Type-Options"
+        value: "nosniff"
+      - key: "X-Frame-Options"
+        value: "DENY"
+      - key: "Referrer-Policy"
+        value: "strict-origin-when-cross-origin"
+
+      # Permissions Policy (modern replacement for Feature Policy)
+      - key: "Permissions-Policy"
+        value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+
+      # Cross origin isolation related headers
+      - key: "Cross-Origin-Opener-Policy"
+        value: "same-origin"
+      - key: "Cross-Origin-Resource-Policy"
+        value: "same-origin"
+
+      # Safe baseline CSP
+      # Note: This CSP is intentionally conservative and usually works for typical Next.js/React SPAs.
+      # If you load external scripts (analytics, chat widgets, maps) you must add those domains.
+      - key: "Content-Security-Policy"
+        value: "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; font-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' https: wss:; upgrade-insecure-requests"
+
+      # Reduce leakage
+      - key: "X-DNS-Prefetch-Control"
+        value: "off"
+
+      # Avoid exposing server details
+      - key: "Server"
+        value: ""
+
+  # HTML should not be cached aggressively (ensures users get new deployments quickly)
+  - pattern: "**/*.html"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=0, must-revalidate"
+
+  # JSON (config, manifests) should refresh quickly
+  - pattern: "**/*.json"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=0, must-revalidate"
+
+  # Service worker must update quickly, otherwise users get stuck on old builds
+  - pattern: "**/service-worker.js"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=0, must-revalidate"
+
+  # Next.js build assets are content hashed and safe to cache long term
+  - pattern: "_next/static/**"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+
+  # Static assets (images, fonts, css, js) cache long term
+  - pattern: "**/*.js"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+  - pattern: "**/*.css"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+  - pattern: "**/*.png"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+  - pattern: "**/*.jpg"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+  - pattern: "**/*.jpeg"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+  - pattern: "**/*.webp"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+  - pattern: "**/*.svg"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+  - pattern: "**/*.woff"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+  - pattern: "**/*.woff2"
+    headers:
+      - key: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
