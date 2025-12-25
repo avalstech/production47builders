@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>47Builders | Artisan Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:," />
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="nav-left">
+        <div class="logo-placeholder">47B</div>
+        <span class="brand-name">47Builders</span>
+      </div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Website</a>
+        <a href="artisans.html">Directory</a>
+        <a href="artisan-signup.html">Join</a>
+        <a href="artisan-dashboard.html" class="active-link">Dashboard</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle">☰</button>
+    </div>
+  </header>
+
+  <main class="main dashboard-main" style="padding-top:80px;">
+    <div class="dashboard-layout">
+
+      <aside class="dash-sidebar">
+        <div class="dash-user">
+          <div class="dash-avatar">AG</div>
+          <div class="dash-user-meta">
+            <div class="dash-name" id="dashName">Amina Garba</div>
+            <div class="dash-sub" id="dashTrade">Painter and Interior Finisher</div>
+            <div class="dash-badges">
+              <span class="badge badge-verify" id="dashVerifyBadge">Pending Verification</span>
+              <span class="badge badge-city" id="dashCityBadge">Kano</span>
+            </div>
+          </div>
+        </div>
+
+        <nav class="dash-nav">
+          <button class="dash-link active" data-tab="overview">Overview</button>
+          <button class="dash-link" data-tab="leads">Job Leads</button>
+          <button class="dash-link" data-tab="projects">Active Projects</button>
+          <button class="dash-link" data-tab="messages">Messages</button>
+          <button class="dash-link" data-tab="payouts">Payouts</button>
+          <button class="dash-link" data-tab="profile">Profile</button>
+        </nav>
+
+        <div class="dash-help">
+          <p class="dash-help-title">Need help?</p>
+          <a class="dash-help-btn" href="https://wa.me/2348012345678?text=Hi%2047Builders%2C%20I%20need%20help%20with%20my%20artisan%20dashboard." target="_blank" rel="noopener noreferrer">WhatsApp Support</a>
+        </div>
+      </aside>
+
+      <section class="dash-content">
+
+        <div class="dash-topbar">
+          <h1 class="dash-title">Artisan Dashboard</h1>
+          <div class="dash-actions">
+            <button class="secondaryButton dash-small" id="btnRefresh">Refresh</button>
+            <button class="primaryButton dash-small" id="btnAddPortfolio">Add Portfolio</button>
+          </div>
+        </div>
+
+        <div class="dash-alert" id="dashAlert">
+          <strong>Verification pending.</strong> Upload your ID and portfolio to become verified and receive premium leads.
+        </div>
+
+        <!-- OVERVIEW TAB -->
+        <div class="dash-tab active" id="tab-overview">
+          <div class="dash-grid-4">
+            <div class="dash-card">
+              <p class="dash-kpi-label">New Leads</p>
+              <p class="dash-kpi-value" id="kpiLeads">6</p>
+              <p class="dash-kpi-sub">Last 7 days</p>
+            </div>
+            <div class="dash-card">
+              <p class="dash-kpi-label">Active Projects</p>
+              <p class="dash-kpi-value" id="kpiProjects">2</p>
+              <p class="dash-kpi-sub">In progress</p>
+            </div>
+            <div class="dash-card">
+              <p class="dash-kpi-label">Rating</p>
+              <p class="dash-kpi-value" id="kpiRating">4.7</p>
+              <p class="dash-kpi-sub">From 18 reviews</p>
+            </div>
+            <div class="dash-card">
+              <p class="dash-kpi-label">Earnings</p>
+              <p class="dash-kpi-value" id="kpiEarnings">₦ 850,000</p>
+              <p class="dash-kpi-sub">This month</p>
+            </div>
+          </div>
+
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <h2 class="dash-card-title">Next Actions</h2>
+              <div class="dash-list" id="nextActions">
+                <div class="dash-list-item">
+                  <div>
+                    <p class="dash-item-title">Complete verification</p>
+                    <p class="dash-item-sub">Upload valid ID and portfolio to get more leads</p>
+                  </div>
+                  <button class="secondaryButton dash-small" data-jump="profile">Upload</button>
+                </div>
+                <div class="dash-list-item">
+                  <div>
+                    <p class="dash-item-title">Respond to new leads</p>
+                    <p class="dash-item-sub">Fast response improves your lead ranking</p>
+                  </div>
+                  <button class="secondaryButton dash-small" data-jump="leads">View</button>
+                </div>
+                <div class="dash-list-item">
+                  <div>
+                    <p class="dash-item-title">Update progress photos</p>
+                    <p class="dash-item-sub">Keep clients confident with weekly updates</p>
+                  </div>
+                  <button class="secondaryButton dash-small" data-jump="projects">Open</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <h2 class="dash-card-title">Recent Messages</h2>
+              <div class="dash-list" id="recentMessages">
+                <div class="dash-list-item">
+                  <div>
+                    <p class="dash-item-title">Client: Ukachi N.</p>
+                    <p class="dash-item-sub">Can you start the painting on Monday?</p>
+                  </div>
+                  <button class="secondaryButton dash-small" data-jump="messages">Reply</button>
+                </div>
+                <div class="dash-list-item">
+                  <div>
+                    <p class="dash-item-title">47Builders Support</p>
+                    <p class="dash-item-sub">Your documents are being reviewed.</p>
+                  </div>
+                  <button class="secondaryButton dash-small" data-jump="messages">Open</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEADS TAB -->
+        <div class="dash-tab" id="tab-leads">
+          <div class="dash-card">
+            <div class="dash-card-head">
+              <h2 class="dash-card-title">New Job Leads</h2>
+              <div class="dash-mini-filters">
+                <select class="input dash-select" id="leadCity">
+                  <option value="">All Cities</option>
+                  <option value="Lagos">Lagos</option>
+                  <option value="Benin City">Benin City</option>
+                  <option value="Port Harcourt">Port Harcourt</option>
+                  <option value="Kano">Kano</option>
+                </select>
+                <select class="input dash-select" id="leadType">
+                  <option value="">All Trades</option>
+                  <option value="Painter">Painter</option>
+                  <option value="Tiler">Tiler</option>
+                  <option value="Electrician">Electrician</option>
+                  <option value="Plumber">Plumber</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="dash-list" id="leadList">
+              <!-- injected by artisan-dashboard.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECTS TAB -->
+        <div class="dash-tab" id="tab-projects">
+          <div class="dash-card">
+            <h2 class="dash-card-title">Active Projects</h2>
+            <div class="dash-projects" id="projectList">
+              <!-- injected by artisan-dashboard.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- MESSAGES TAB -->
+        <div class="dash-tab" id="tab-messages">
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <h2 class="dash-card-title">Inbox</h2>
+              <div class="dash-list" id="inboxList">
+                <!-- injected by artisan-dashboard.js -->
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <h2 class="dash-card-title">Conversation</h2>
+              <div class="chat-box" id="chatBox">
+                <div class="chat-bubble incoming">
+                  Hi Amina, can you confirm your start date for the interior painting?
+                </div>
+                <div class="chat-bubble outgoing">
+                  Yes, I can start on Monday. I will share progress photos daily.
+                </div>
+              </div>
+
+              <form class="chat-input-row" id="chatForm">
+                <input class="input" id="chatInput" type="text" placeholder="Type a message (placeholder)..." />
+                <button class="primaryButton dash-small" type="submit">Send</button>
+              </form>
+              <p class="dash-note">Messaging is a placeholder. Later we will connect it to your backend.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAYOUTS TAB -->
+        <div class="dash-tab" id="tab-payouts">
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <h2 class="dash-card-title">Wallet</h2>
+              <div class="dash-wallet">
+                <div>
+                  <p class="dash-kpi-label">Available Balance</p>
+                  <p class="dash-kpi-value">₦ 120,000</p>
+                  <p class="dash-kpi-sub">Ready for withdrawal</p>
+                </div>
+                <button class="primaryButton dash-small" id="btnWithdraw">Withdraw</button>
+              </div>
+              <p class="dash-note">Withdrawals are placeholder. Later connect to escrow and payout provider.</p>
+            </div>
+
+            <div class="dash-card">
+              <h2 class="dash-card-title">Payout History</h2>
+              <div class="dash-list" id="payoutList">
+                <div class="dash-list-item">
+                  <div>
+                    <p class="dash-item-title">₦ 300,000</p>
+                    <p class="dash-item-sub">Completed milestone payment, Dec 12, 2025</p>
+                  </div>
+                  <span class="badge badge-success">Paid</span>
+                </div>
+                <div class="dash-list-item">
+                  <div>
+                    <p class="dash-item-title">₦ 180,000</p>
+                    <p class="dash-item-sub">Finishing deposit, Nov 28, 2025</p>
+                  </div>
+                  <span class="badge badge-success">Paid</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROFILE TAB -->
+        <div class="dash-tab" id="tab-profile">
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <h2 class="dash-card-title">Profile Completion</h2>
+              <div class="dash-checklist" id="profileChecklist">
+                <label class="check-item">
+                  <input type="checkbox" checked />
+                  <span>Full name and phone</span>
+                </label>
+                <label class="check-item">
+                  <input type="checkbox" />
+                  <span>Government ID uploaded</span>
+                </label>
+                <label class="check-item">
+                  <input type="checkbox" />
+                  <span>Portfolio link added</span>
+                </label>
+                <label class="check-item">
+                  <input type="checkbox" />
+                  <span>Service areas selected</span>
+                </label>
+                <label class="check-item">
+                  <input type="checkbox" />
+                  <span>Bank details added</span>
+                </label>
+              </div>
+
+              <div class="dash-profile-actions">
+                <button class="primaryButton dash-small" id="btnSaveProfile">Save Profile</button>
+                <button class="secondaryButton dash-small" id="btnUploadId">Upload ID</button>
+              </div>
+              <p class="formMessage" id="profileMessage"></p>
+            </div>
+
+            <div class="dash-card">
+              <h2 class="dash-card-title">Public Profile Preview</h2>
+              <div class="profile-preview">
+                <div class="avatar profile-big">AG</div>
+                <h3 id="previewName">Amina Garba</h3>
+                <p class="skill" id="previewSkill">Painter and Interior Finisher</p>
+                <p class="location" id="previewLocation">Kano, Nigeria</p>
+                <p class="jobs">Completed 104 jobs</p>
+
+                <div class="contact-row" style="justify-content:center;">
+                  <a href="#" class="contact-btn" id="previewCall">Call</a>
+                  <a href="#" class="contact-btn whatsapp" id="previewWhatsApp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                </div>
+
+                <p class="dash-note" style="margin-top:0.9rem;">
+                  This is how clients will see you once verified.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <script src="artisan-dashboard.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
